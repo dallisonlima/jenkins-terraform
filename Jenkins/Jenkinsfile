@@ -44,6 +44,14 @@ pipeline {
             }
         }
 
+        stage('Approval') { 
+      steps { 
+        script { 
+          def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform ', nome: 'confirmar'] ]) 
+        } 
+      } 
+    }
+
         stage('Approval to Apply') {
             when {
                 not {
@@ -53,7 +61,7 @@ pipeline {
             steps {
                 script {
                     def plan = readFile 'tfplan.txt'
-                    input: "Do you want to apply the plan?",
+                    input message: "Do you want to apply the plan?",
                     parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
                }
             }
