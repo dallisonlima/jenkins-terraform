@@ -37,27 +37,23 @@ pipeline {
                 not {
                     equals expected: true, actual: params.destroy
                 }
-
-                    steps {
-                    script {
-                    def userInput = input(id: 'confirm', message: 'Deseja fazer o apply do terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
-                    }
+            }
+            steps {
+                script {
+                def userInput = input(id: 'confirm', message: 'Deseja fazer o apply do terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
                 }
             }
-            
         }
 
         stage('Approval to Destroy') {
             when {
-                equals expected: true, actual: params.destroy
-                
-                    steps {
-                    script {
-                    def userInput = input(id: 'confirm', message: 'Deseja fazer o destroy do terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Destroy terraform', name: 'confirm'] ])
-                    }
+                    equals expected: true, actual: params.destroy
+            }
+            steps {
+                script {
+                def userInput = input(id: 'confirm', message: 'Deseja fazer o destroy do terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Destroy terraform', name: 'confirm'] ])
                 }
             }
-            
         }
 
         stage('Apply') {
