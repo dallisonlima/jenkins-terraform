@@ -38,11 +38,9 @@ pipeline {
             }
             
             steps {
-                sh '''
-                'ls -la'
-                'terraform plan -input=false -out=tfplan.out'
-                'terraform show -json tfplan.out'
-                '''
+                sh 'ls -la'
+                sh 'terraform plan -input=false -out=tfplan.out'
+                sh 'terraform show -json tfplan.out'   
             }
         }
 
