@@ -16,6 +16,20 @@ pipeline {
           }
         }
 
+        stage('Init'){
+            when{
+                not{
+                    equals expected: true, actual: params.destroy
+                }
+            }
+
+            steps{
+                sh 'ls -la'
+                sh 'terraform init -input=false'
+            }
+            
+        }
+
         stage('Plan') {
             when {
                 not {
@@ -24,11 +38,11 @@ pipeline {
             }
             
             steps {
-                sh 'ls -la'
-                sh 'terraform init -input=false'
-
-                sh "terraform plan -input=false -out tfplan "
-                sh 'terraform show -no-color tfplan > tfplan.txt'
+                sh '''
+                'ls -la'
+                'terraform plan -input=false -out=tfplan.out'
+                'terraform show -json tfplan.out'
+                '''
             }
         }
 
@@ -42,7 +56,7 @@ pipeline {
                 script {
                     def plan = readFile 'tfplan.txt'
                     input message: "Do you want to apply the plan?",
-                    parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
+                    parameters: [textarea(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
                }
             }
         }
