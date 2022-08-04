@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    options {
-        skipDefaultCheckout(true)
-    }
 
     parameters {
         booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
@@ -12,12 +9,12 @@ pipeline {
 
 
     stages {
-        stage('checkout') {
+        stage('Checkout') {
             steps {
-                git "https://github.com/dallisonlima/jenkins-terraform"
-                sh 'ls -la'
-                }
-            }
+            checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/dallisonlima/jenkins-terraform']]])            
+
+          }
+        }
 
         stage('Plan') {
             when {
