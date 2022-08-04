@@ -40,7 +40,7 @@ pipeline {
             steps {
                 sh 'ls -la'
                 sh 'terraform plan -input=false -out=tfplan.out'
-                sh 'terraform show -json tfplan.out'   
+                sh 'terraform show -no-color tfplan > tfplan.txt'   
             }
         }
 
@@ -54,7 +54,7 @@ pipeline {
                 script {
                     def plan = readFile 'tfplan.txt'
                     input message: "Do you want to apply the plan?",
-                    parameters: [textarea(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
+                    parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
                }
             }
         }
