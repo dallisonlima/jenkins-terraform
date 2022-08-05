@@ -19,7 +19,7 @@ pipeline {
         stage('Init'){
             when{
                 not{
-                    equals expected: true, actual: params.destroy
+                    equals expected: true, actual: params.Destroy
                 }
             }
 
@@ -33,7 +33,7 @@ pipeline {
         stage('Plan') {
             when {
                 not {
-                    equals expected: true, actual: params.destroy
+                    equals expected: true, actual: params.Destroy
                 }
             }
             
@@ -47,7 +47,7 @@ pipeline {
         stage('Approval to Apply') {
             when {
                 not {
-                    equals expected: true, actual: params.destroy
+                    equals expected: true, actual: params.Destroy
                 }
             }
             steps {
@@ -61,7 +61,7 @@ pipeline {
 
         stage('Approval to Destroy') {
             when {
-                    equals expected: true, actual: params.destroy
+                    equals expected: true, actual: params.Destroy
             }
             steps {
                 script {
@@ -73,7 +73,7 @@ pipeline {
         stage('Apply') {
             when {
                 not {
-                    equals expected: true, actual: params.destroy
+                    equals expected: true, actual: params.Destroy
                 }
             }
             
@@ -84,7 +84,7 @@ pipeline {
         
         stage('Destroy') {
             when {
-                equals expected: true, actual: params.destroy
+                equals expected: true, actual: params.Destroy
             }
         
         steps {
