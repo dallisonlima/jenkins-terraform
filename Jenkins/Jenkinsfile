@@ -39,7 +39,7 @@ pipeline {
             
             steps {
                 sh 'ls -la'
-                sh 'terraform plan -input=false -out=tfplan.out'
+                sh 'terraform plan -input=false -out=tfplan'
                 sh 'terraform show -no-color tfplan > tfplan.txt'   
             }
         }
