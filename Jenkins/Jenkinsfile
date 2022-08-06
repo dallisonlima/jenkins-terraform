@@ -48,7 +48,8 @@ pipeline {
         stage('test3') {
             steps {
                 script {
-                    if (equals expected: true, actual: params.Destroy) {
+                    def test = equals expected: true, actual: params.Destroy
+                    if (test == true) {
                         echo 'caiu no if'
                     } else {
                         echo 'caiu no else'
