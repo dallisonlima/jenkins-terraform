@@ -48,8 +48,8 @@ pipeline {
         stage('Approval') {
             steps {
                 script {
-                    def test = equals expected: true, actual: params.Destroy
-                    if (test) {
+                    def test = params.Destroy
+                    if (test == true) {
                         script {
                             def userInput = input(id: 'Confirm', message: 'Deseja fazer o destroy do terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Destroy terraform', name: 'Confirm'] ])
                         }
