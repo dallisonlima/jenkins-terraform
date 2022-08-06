@@ -41,8 +41,7 @@ pipeline {
                 sh 'ls -la'
                 sh 'terraform plan -input=false -out=tfplan'
                 sh 'terraform show -no-color tfplan > tfplan.txt' 
-                sh 'ls -la' 
-                // sh 'aws s3 cp ./tfplan.txt s3://dallison-state-terraform/last-tfplan/' 
+                sh 'aws s3 cp ./tfplan.txt s3://dallison-state-terraform/last-tfplan/' 
             }
         }
 
