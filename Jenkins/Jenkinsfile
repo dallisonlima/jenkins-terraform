@@ -58,9 +58,6 @@ pipeline {
                     parameters: [string(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
                }
             }
-        }
-
-        stage('Approval to Destroy') {
             when {
                     equals expected: true, actual: params.Destroy
             }
@@ -70,6 +67,17 @@ pipeline {
                 }
             }
         }
+
+        // stage('Approval to Destroy') {
+        //     when {
+        //             equals expected: true, actual: params.Destroy
+        //     }
+        //     steps {
+        //         script {
+        //         def userInput = input(id: 'Confirm', message: 'Deseja fazer o destroy do terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Destroy terraform', name: 'Confirm'] ])
+        //         }
+        //     }
+        // }
 
         stage('Apply') {
             when {
@@ -81,17 +89,25 @@ pipeline {
             steps {
                 sh "terraform apply -input=false tfplan"
             }
-        }
-        
-        stage('Destroy') {
+
             when {
                 equals expected: true, actual: params.Destroy
             }
         
-        steps {
-           sh "terraform destroy --auto-approve"
+            steps {
+            sh "terraform destroy --auto-approve"
+            }
         }
-    }
+        
+    //     stage('Destroy') {
+    //         when {
+    //             equals expected: true, actual: params.Destroy
+    //         }
+        
+    //         steps {
+    //         sh "terraform destroy --auto-approve"
+    //         }
+    // }
 
   }
 }
