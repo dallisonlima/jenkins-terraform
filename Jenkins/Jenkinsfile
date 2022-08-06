@@ -63,33 +63,7 @@ pipeline {
                 }
             }
         }
-
-        // stage('Approval to Apply') {
-        //     when {
-        //         not {
-        //             equals expected: true, actual: params.Destroy
-        //         }
-        //     }
-        //     steps {
-        //         script {
-        //             def plan = readFile 'tfplan.txt'
-        //             input message: "Do you want to Apply",
-        //             parameters: [string(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
-        //        }
-        //     }
-        // }
-
-        // stage('Approval to Destroy') {
-        //     when {
-        //             equals expected: true, actual: params.Destroy
-        //     }
-        //     steps {
-        //         script {
-        //         def userInput = input(id: 'Confirm', message: 'Deseja fazer o destroy do terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Destroy terraform', name: 'Confirm'] ])
-        //         }
-        //     }
-        // }
-
+        
         stage('Apply') {
             when {
                 not {
