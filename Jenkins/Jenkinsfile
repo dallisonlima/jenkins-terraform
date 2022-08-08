@@ -16,16 +16,16 @@ pipeline {
           }
         }
 
-        stage('tfsec') {
+        stage('Infracost') {
             agent {
                 docker {
-                    image 'aquasec/tfsec-ci:latest'
+                    image 'infracost/infracost:latest'
                     // reuseNode true
                 }
             }
             steps {
-                echo 'Executing TFSec'
-                sh 'tfsec -v'
+                echo 'Executing Infracost'
+                sh 'infracost breakdown --path'
                 // sh 'tfsec --custom-check-dir tf-sec '
             }
         }
