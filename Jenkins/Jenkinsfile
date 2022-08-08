@@ -20,13 +20,11 @@ pipeline {
             agent {
                 docker {
                     image 'infracost/infracost:latest'
-                    // reuseNode true
                 }
             }
             steps {
                 echo 'Executing Infracost'
                 sh 'infracost breakdown --path'
-                // sh 'tfsec --custom-check-dir tf-sec '
             }
         }
 
