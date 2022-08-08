@@ -19,7 +19,7 @@ pipeline {
         stage('tfsec') {
             agent {
                 docker {
-                    image 'tfsec/tfsec'
+                    image 'aquasec/tfsec:latest'
                     reuseNode true
                 }
             }
