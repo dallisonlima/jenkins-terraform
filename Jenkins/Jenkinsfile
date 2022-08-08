@@ -16,6 +16,20 @@ pipeline {
           }
         }
 
+        stage('tfsec') {
+            agent {
+                docker {
+                    image 'tfsec/tfsec-ci:latest'
+                    reuseNode true
+                }
+            }
+            steps {
+                echo 'Executing TFSec'
+                sh 'tfsec -v'
+                // sh 'tfsec --custom-check-dir tf-sec '
+            }
+        }
+
         stage('Init'){
             when{
                 not{
