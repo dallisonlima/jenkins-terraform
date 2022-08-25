@@ -9,10 +9,9 @@ resource "aws_instance" "web" {
     sudo yum install -y git
     wait
     git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew
-    wait
     sudo mkdir ~/.linuxbrew/bin
     sudo ln -s ../Homebrew/bin/brew ~/.linuxbrew/bin
-    sudo eval $(~/.linuxbrew/bin/brew shellenv)
+    eval $(~/.linuxbrew/bin/brew shellenv)
   EOF
 
   tags = {
