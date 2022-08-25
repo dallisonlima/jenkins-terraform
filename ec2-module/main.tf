@@ -6,8 +6,9 @@ resource "aws_instance" "web" {
     #!/bin/bash
     sudo yum update -y
     sudo yum install -y git
+    sleep 60
     git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew
-    sleep 180
+    sleep 60
     sudo mkdir ~/.linuxbrew/bin
     sudo ln -s ../Homebrew/bin/brew ~/.linuxbrew/bin
     eval $(~/.linuxbrew/bin/brew shellenv)
