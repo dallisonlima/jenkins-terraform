@@ -11,6 +11,6 @@ resource "aws_instance" "web" {
   EOF
 
   tags = {
-    Name = "CriadaByJenkinsPipeline"
+    Name = "CreateByJenkinsPipeline"
   }
 }
