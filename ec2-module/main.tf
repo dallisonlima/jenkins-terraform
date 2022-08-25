@@ -5,7 +5,9 @@ resource "aws_instance" "web" {
   user_data = <<EOF
     #!/bin/bash
     sudo yum update -y
+    wait
     sudo yum install -y git
+    wait
     git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew
     wait
     sudo mkdir ~/.linuxbrew/bin
