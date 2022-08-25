@@ -5,10 +5,9 @@ resource "aws_instance" "web" {
   user_data = <<EOF
     #!/bin/bash
     sudo yum update -y
-    wait
     sudo yum install -y git
-    wait
     git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew
+    sleep 180
     sudo mkdir ~/.linuxbrew/bin
     sudo ln -s ../Homebrew/bin/brew ~/.linuxbrew/bin
     eval $(~/.linuxbrew/bin/brew shellenv)
