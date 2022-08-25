@@ -6,7 +6,7 @@ resource "aws_instance" "web" {
     #!/bin/bash
     sudo yum update -y
     sudo yum install -y gcc
-    sudo yum install git
+    sudo yum install -y git
     sudo curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
   EOF
 
