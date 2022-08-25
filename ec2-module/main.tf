@@ -5,9 +5,11 @@ resource "aws_instance" "web" {
   user_data = <<EOF
     #!/bin/bash
     sudo yum update -y
-    sudo yum install -y gcc
     sudo yum install -y git
-    sudo curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
+    git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew
+    mkdir ~/.linuxbrew/bin
+    ln -s ../Homebrew/bin/brew ~/.linuxbrew/bin
+    eval $(~/.linuxbrew/bin/brew shellenv)
   EOF
 
   tags = {
