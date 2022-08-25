@@ -4,11 +4,9 @@ resource "aws_instance" "web" {
   key_name = "homebrew-teste"
   user_data = <<EOF
     #!/bin/bash
-
     sudo yum update -y
-
     sudo yum install -y gcc
-
+    sudo yum install git
     sudo curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
   EOF
 
